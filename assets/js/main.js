@@ -227,6 +227,11 @@
     el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
     el.style.setProperty('--my', (e.clientY - r.top) + 'px');
   }));
+  // Whole project card opens its site; inner links and buttons keep their own behaviour.
+  $$('.project-card[data-href]').forEach(card => card.addEventListener('click', e => {
+    if (e.target.closest('a, button') || String(window.getSelection())) return;
+    window.open(card.dataset.href, '_blank', 'noopener');
+  }));
   const hero = $('.hero');
   if (hero && fine) hero.addEventListener('pointermove', e => {
     const r = hero.getBoundingClientRect();
